@@ -6,7 +6,7 @@ More then a German test web-app, it is in-general application for `language` tes
 
 ## For Backend
 
-Step 1: Install virtualenv on your system.
+Step 1: Install virtualenv on your system.(you can skip this step if you don't wan't to create virtual environment)
 ```bash
   pip install virtualenv
 ```
@@ -16,12 +16,17 @@ Step 2: Open the project directory & cd into backend folder.
   cd .\backend\
 ```
 
-Step 3: Install all the required dependencies.
+Step 3: Create a virtual environment in the current directory.(you can skip this step if you don't wan't to create virtual environment)
+```bash
+  virtualenv ./
+```
+
+Step 4: Install all the required dependencies.
 ```bash
   pip install -r requirements.txt
 ```
 
-Step 4: Start your backend Project
+Step 5: Start your backend Project
 ```bash
   flask run
 ```
