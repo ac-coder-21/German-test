@@ -108,6 +108,7 @@ export default {
       }
       this.started = true;
       this.clickCount = 0;
+      this.wrongAnswers = [];
       this.fetchedWords = [];
       this.testCompleted = false;
       this.submitDisabled = false;
@@ -146,11 +147,17 @@ export default {
         });
       }
       this.submitDisabled = true;
+      if (this.clickCount + 1 === this.numberOfQuestions) {
+        this.testCompleted = true;
+      }
     },
     fetchNextWord() {
       if (this.clickCount < this.numberOfQuestions && !this.testCompleted) {
         this.fetchData();
         this.clickCount++;
+      }
+      if (this.clickCount + 1 === this.numberOfQuestions) {
+        this.testCompleted = true;
       }
     },
     resetTest() {
