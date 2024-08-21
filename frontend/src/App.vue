@@ -7,15 +7,17 @@
         Start Test
       </button>
       <div class="input-container">
-        <label for="numQuestions" class="label">No. of Questions:</label>
-        <input
-          type="number"
-          id="numQuestions"
-          v-model.number="numberOfQuestions"
-          class="text-box"
-          min="1"
-          max="20" 
-        />
+        <label for="jsonFile" class="label">Select JSON File:</label>
+        <select
+          id="jsonFile"
+          v-model="selectedFile"
+          class="dropdown-box"
+        >
+          <option value="" disabled>Select a file</option>
+          <option v-for="file in jsonFiles" :key="file" :value="file">
+            {{ file }}
+          </option>
+        </select>
       </div>
     </div>
 
@@ -25,7 +27,7 @@
         <div class="input-group">
           <div>
             <label for="english" class="label">English:</label>
-            <input type="text" id="english" :value="data.english" readonly class="text-box" />
+            <input type="text" id="english" :value="currentWord.english" readonly class="text-box" />
           </div>
 
           <div>
@@ -39,7 +41,7 @@
 
       <p v-if="resultMessage" :style="{ color: resultColor }">{{ resultMessage }}</p>
 
-      <button v-if="resultMessage && clickCount < numberOfQuestions" @click="fetchNextWord" class="next-word-button">
+      <button v-if="resultMessage && clickCount < numberOfQuestions" @click="nextWord" class="next-word-button">
         Next Word &#8594;
       </button>
     </div>
@@ -86,7 +88,10 @@ export default {
     return {
       started: false,
       numberOfQuestions: 5,
-      data: {
+      maxQuestions: 0,
+      selectedFile: '',
+      jsonFiles: ['A1_Nouns', 'A1_Verbs'], // Add your JSON file names here
+      currentWord: {
         english: '',
         german: '',
       },
@@ -106,6 +111,10 @@ export default {
         alert('Number of questions must be at least 1.');
         return;
       }
+      if (!this.selectedFile) {
+        alert('Please select a JSON file.');
+        return;
+      }
       this.started = true;
       this.clickCount = 0;
       this.wrongAnswers = [];
@@ -115,55 +124,54 @@ export default {
       this.fetchData();
     },
     fetchData() {
-      fetch('http://127.0.0.1:5000/test')
+      fetch(`http://127.0.0.1:5000/test?file=${this.selectedFile}`)
         .then((response) => response.json())
         .then((data) => {
-          if (this.fetchedWords.includes(data.german)) {
-            this.testCompleted = true;
-            return;
-          }
-          this.fetchedWords.push(data.german);
-          this.data = data;
-          this.userInput = '';
-          this.resultMessage = '';
-          this.resultColor = '';
-          this.submitDisabled = false;
+          this.fetchedWords = data;
+          this.maxQuestions = data.length;
+          this.numberOfQuestions = Math.min(this.numberOfQuestions, this.maxQuestions);
+          this.nextWord();
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
         });
     },
     checkAnswer() {
-      if (this.userInput.trim() === this.data.german) {
+      if (this.userInput.trim() === this.currentWord.german) {
         this.resultMessage = 'Correct!!!';
         this.resultColor = 'green';
       } else {
         this.resultMessage = 'Wrong!!!';
         this.resultColor = 'red';
         this.wrongAnswers.push({
-          question: this.data.english,
+          question: this.currentWord.english,
           yourAnswer: this.userInput,
-          correctAnswer: this.data.german,
+          correctAnswer: this.currentWord.german,
         });
       }
       this.submitDisabled = true;
-      if (this.clickCount + 1 === this.numberOfQuestions) {
+      this.clickCount++;
+
+      if (this.clickCount === this.numberOfQuestions || this.fetchedWords.length === 0) {
         this.testCompleted = true;
       }
     },
-    fetchNextWord() {
-      if (this.clickCount < this.numberOfQuestions && !this.testCompleted) {
-        this.fetchData();
-        this.clickCount++;
-      }
-      if (this.clickCount + 1 === this.numberOfQuestions) {
+    nextWord() {
+      if (this.fetchedWords.length > 0) {
+        this.currentWord = this.fetchedWords.shift(); // Pop the first element from the array
+        this.userInput = '';
+        this.resultMessage = '';
+        this.resultColor = '';
+        this.submitDisabled = false;
+      } else {
         this.testCompleted = true;
       }
     },
     resetTest() {
       this.started = false;
       this.numberOfQuestions = 5;
-      this.data = { english: '', german: '' };
+      this.selectedFile = '';
+      this.currentWord = { english: '', german: '' };
       this.userInput = '';
       this.resultMessage = '';
       this.resultColor = '';
@@ -344,5 +352,14 @@ button:disabled {
   color: white;
   border: none;
   border-radius: 8px;
+}
+
+.dropdown-box {
+  background-color: white;
+  border-radius: 8px;
+  color: black;
+  font-size: 1.25rem;
+  padding: 10px;
+  width: 200px;
 }
 </style>

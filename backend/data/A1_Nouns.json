@@ -1,0 +1,290 @@
+{
+    "words": [
+        {
+            "german": "der Mann",
+            "english": "Man"
+        },
+        {
+            "german": "die Frau",
+            "english": "Woman"
+        },
+        {
+            "german": "der Abend",
+            "english": "Evening"
+        },
+        {
+            "german": "die Adresse",
+            "english": "Address"
+        },
+        {
+            "german": "die Antwort",
+            "english": "Answer"
+        },
+        {
+            "german": "der Artz",
+            "english": "Doctor"
+        },
+        {
+            "german": "die Artzin",
+            "english": "Female Doctor"
+        },
+        {
+            "german": "das Beispiel",
+            "english": "example"
+        },
+        {
+            "german": "das Beruf",
+            "english": "Job"
+        },
+        {
+            "german": "das Bild",
+            "english": "Picture"
+        },
+        {
+            "german": "der Computer",
+            "english": "Computer"
+        },
+        {
+            "german": "das Deutsch",
+            "english": "German"
+        },
+        {
+            "german": "das Deutschland",
+            "english": "Germany"
+        },
+        {
+            "german": "die Entschuldigung",
+            "english": "Apology"
+        },
+        {
+            "german": "das Europa",
+            "english": "Europe"
+        },
+        {
+            "german": "der Fahrer",
+            "english": "Driver"
+        },
+        {
+            "german": "die Familie",
+            "english": "Family"
+        },
+        {
+            "german": "der Familiename",
+            "english": "Family name / Surname"
+        },
+        {
+            "german": "der Flug",
+            "english": "Flight"
+        },
+        {
+            "german": "der Flughafen",
+            "english": "airport"
+        },
+        {
+            "german": "das Foto",
+            "english": "photo"
+        },
+        {
+            "german": "dir Frage",
+            "english": "Question"
+        },
+        {
+            "german": "der Freund",
+            "english": "Friend"
+        },
+        {
+            "german": "der Friseur",
+            "english": "Hairdresser"
+        },
+        {
+            "german": "die Gitarre",
+            "english": "Guitar"
+        },
+        {
+            "german": "der Herr",
+            "english": "Mister"
+        },
+        {
+            "german": "die Information",
+            "english": "Information"
+        },
+        {
+            "german": "der Ingenieur",
+            "english": "Engineer"
+        },
+        {
+            "german": "das Jahr",
+            "english": "Year"
+        },
+        {
+            "german": "der Kaffee",
+            "english": "Coffee"
+        },
+        {
+            "german": "die Kellnerin",
+            "english": "Waitress"
+        },
+        {
+            "german": "das Kind",
+            "english": "Child"
+        },
+        {
+            "german": "der Kisok",
+            "english": "Kisok"
+        },
+        {
+            "german": "der Kurs",
+            "english": "Course"
+        },
+        {
+            "german": "das Land",
+            "english": "Country"
+        },
+        {
+            "german": "die Lehrerin",
+            "english": "Female Teacher"
+        },
+        {
+            "german": "das Lehrer",
+            "english": "Male Teacher"
+        },
+        {
+            "german": "die Leute",
+            "english": "People"
+        },
+        {
+            "german": "die Minute",
+            "english": "Minute"
+        },
+        {
+            "german": "der Moment",
+            "english": "Moment"
+        },
+        {
+            "german": "der Morgen",
+            "english": "Morning"
+        },
+        {
+            "german": "der Nachname",
+            "english": "Surname"
+        },
+        {
+            "german": "der Name",
+            "english": "Name"
+        },
+        {
+            "german": "das Neujahr",
+            "english": "New Year"
+        },
+        {
+            "german": "die Nummer",
+            "english": "Number"
+        },
+        {
+            "german": "das Österreich",
+            "english": "Austria"
+        },
+        {
+            "german": "der Pass",
+            "english": "Pass"
+        },
+        {
+            "german": "die Person",
+            "english": "Person"
+        },
+        {
+            "german": "der Pass",
+            "english": "Pass"
+        },
+        {
+            "german": "der Platz",
+            "english": "Place"
+        },
+        {
+            "german": "das Radio",
+            "english": "Radio"
+        },
+        {
+            "german": "das Risiko",
+            "english": "Risk"
+        },
+        {
+            "german": "die Schokolade",
+            "english": "Chocolate"
+        },
+        {
+            "german": "die Schewiz",
+            "english": "Switzerland"
+        },
+        {
+            "german": "das Sofa",
+            "english": "Sofa"
+        },
+        {
+            "german": "die Stadt",
+            "english": "City"
+        },
+        {
+            "german": "der Tage",
+            "english": "Day"
+        },
+        {
+            "german": "der Taxifahrer",
+            "english": "Male Taxi Driver"
+        },
+        {
+            "german": "die Taxifahrerin",
+            "english": "Female Taxi Driver"
+        },
+        {
+            "german": "der Tee",
+            "english": "Tea"
+        },
+        {
+            "german": "das Telefon",
+            "english": "Telephone"
+        },
+        {
+            "german": "die Telephonnummer",
+            "english": "Telephone number"
+        },
+        {
+            "german": "der Text",
+            "english": "Text"
+        },
+        {
+            "german": "der Tourist",
+            "english": "Tourist"
+        },
+        {
+            "german": "der Vorname",
+            "english": "First name"
+        },
+        {
+            "german": "das Wort",
+            "english": "Word"
+        },
+        {
+            "german": "die Sprache",
+            "english": "Language"
+        },
+        {
+            "german": "die Zahl",
+            "english": "Nummer"
+        },
+        {
+            "german": "die Zeit",
+            "english": "Time"
+        },
+        {
+            "german": "der Zettel",
+            "english": "Piece of paper"
+        },
+        {
+            "german": "die Zigarette",
+            "english": "Ciggartte"
+        }
+        
+        
+    ]
+}
