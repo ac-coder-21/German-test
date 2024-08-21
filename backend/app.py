@@ -14,7 +14,6 @@ def get_random_german_word():
 
     words = data.get("words", [])
     if words:
-        random_word = random.choice(words)
-        return json.dumps(random_word)
+        return json.dumps(words)
     else:
         return json.dumps({"error": "No words available"})
