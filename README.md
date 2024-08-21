@@ -1,4 +1,4 @@
-# German-test:
+# Vocabulary-test:
 A German test project developed with Flask &amp; Vue.JS.
 
 More then a German test web-app, it is in-general application for `language` test. You can change the data as per your need, like Spanish, Russian, etc by making changes to german_words.json or adding another file and renaming calling it in the `app.py` file.
