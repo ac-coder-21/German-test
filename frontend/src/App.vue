@@ -90,7 +90,7 @@ export default {
       numberOfQuestions: 5,
       maxQuestions: 0,
       selectedFile: '',
-      jsonFiles: ['A1_Nouns', 'A1_Verbs'], // Add your JSON file names here
+      jsonFiles: ['A1 Nouns', 'A1 Verbs'], // Add your JSON file names here
       currentWord: {
         english: '',
         german: '',

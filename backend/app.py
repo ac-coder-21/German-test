@@ -10,7 +10,8 @@ def get_random_german_word():
     file_name = request.args.get('file')
     if not file_name:
         return jsonify({"error": "No file specified"}), 400
-
+    
+    file_name = file_name.replace(' ', '_')
     try:
         with open(f'./data/{file_name}.json', 'r') as file:
             data = json.load(file)
