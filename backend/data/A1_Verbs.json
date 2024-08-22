@@ -1,12 +1,40 @@
 {
     "words": [
         {
-            "german": "entschuldigen",
-            "english": "to apologise"
+            "german": "antworten",
+            "english": "to answer"
+        },
+        {
+            "german": "arbeiten",
+            "english": "to work"
         },
         {
             "german": "dauren",
             "english": "to last"
+        },
+        {
+            "german": "entschuldigen",
+            "english": "to apologise"
+        },
+        {
+            "german": "fliegen",
+            "english": "to fly"
+        },
+        {
+            "german": "fragen",
+            "english": "to ask"
+        },
+        {
+            "german": "heißen",
+            "english": "to be called"
+        },
+        {
+            "german": "hören",
+            "english": "to hear"
+        },
+        {
+            "german": "ist",
+            "english": "to be"
         },
         {
             "german": "kennen",
@@ -15,6 +43,54 @@
         {
             "german": "kommen",
             "english": "to come"
+        },
+        {
+            "german": "leben",
+            "english": "to live(live life)"
+        },
+        {
+            "german": "lernen",
+            "english": "to learn"
+        },
+        {
+            "german": "lesen",
+            "english": "to read"
+        },
+        {
+            "german": "leiben",
+            "english": "to love"
+        },
+        {
+            "german": "möchten",
+            "english": "to like"
+        },
+        {
+            "german": "sagen",
+            "english": "to say"
+        },
+        {
+            "german": "schrieben",
+            "english": "to write"
+        },
+        {
+            "german": "sind",
+            "english": "to be (are)"
+        },
+        {
+            "german": "spielen",
+            "english": "to play"
+        },
+        {
+            "german": "sprechen",
+            "english": "to speak"
+        },
+        {
+            "german": "suchen",
+            "english": "to search- to look for"
+        },
+        {
+            "german": "wohnen",
+            "english": "to live(live at a place)"
         }
     ]
 }
