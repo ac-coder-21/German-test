@@ -13,7 +13,7 @@ def get_random_german_word():
     
     file_name = file_name.replace(' ', '_')
     try:
-        with open(f'./data/{file_name}.json', 'r') as file:
+        with open(f'./data/{file_name}.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
     except FileNotFoundError:
         return jsonify({"error": "File not found"}), 404
@@ -22,8 +22,10 @@ def get_random_german_word():
 
     words = data.get("words", [])
     if words:
-        random.shuffle(words)  
-        return jsonify(words)
+        random.shuffle(words)
+        response = jsonify(words)
+        response.headers.add('Content-Type', 'application/json; charset=utf-8')
+        return response
     else:
         return jsonify({"error": "No words available"}), 404
 

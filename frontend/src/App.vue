@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    
     <!-- Start Page -->
     <div v-if="!started">
       <button @click="startTest" class="start-button">
@@ -22,29 +21,32 @@
     </div>
 
     <!-- Test Page -->
-    <div v-if="started && clickCount < numberOfQuestions && !testCompleted">
-      <form @submit.prevent="checkAnswer">
-        <div class="input-group">
-          <div>
-            <label for="english" class="label">English:</label>
-            <input type="text" id="english" :value="currentWord.english" readonly class="text-box" />
-          </div>
+    <div v-if="started && !testCompleted">
+  <form @submit.prevent="checkAnswer">
+    <p class="question-counter">Question {{ clickCount + 1 }} of {{ numberOfQuestions }}</p>
+    <div class="input-group">
+      
 
-          <div>
-            <label for="german" class="label">German:</label>
-            <input type="text" id="german" v-model="userInput" class="text-box" />
-          </div>
-        </div>
+      <div>
+        <label for="english" class="label">English:</label>
+        <input type="text" id="english" :value="currentWord.english" readonly class="text-box" />
+      </div>
 
-        <button type="submit" :disabled="submitDisabled">Submit</button>
-      </form>
-
-      <p v-if="resultMessage" :style="{ color: resultColor }">{{ resultMessage }}</p>
-
-      <button v-if="resultMessage && clickCount < numberOfQuestions" @click="nextWord" class="next-word-button">
-        Next Word &#8594;
-      </button>
+      <div>
+        <label for="german" class="label">German:</label>
+        <input type="text" id="german" v-model="userInput" class="text-box" />
+      </div>
     </div>
+
+    <button type="submit" :disabled="submitDisabled">Submit</button>
+  </form>
+
+  <p v-if="resultMessage" :style="{ color: resultColor }">{{ resultMessage }}</p>
+
+  <button v-if="resultMessage && !testCompleted" @click="nextWord" class="next-word-button">
+    {{ isLastQuestion ? 'Finish' : 'Next Word' }} &#8594;
+  </button>
+</div>
 
     <!-- Result Page -->
     <div v-if="testCompleted">
@@ -87,8 +89,6 @@ export default {
   data() {
     return {
       started: false,
-      numberOfQuestions: 5,
-      maxQuestions: 0,
       selectedFile: '',
       jsonFiles: ['A1 Nouns', 'A1 Verbs'], // Add your JSON file names here
       currentWord: {
@@ -103,14 +103,19 @@ export default {
       fetchedWords: [],
       testCompleted: false,
       submitDisabled: false,
+      myheaders: new Headers()
     };
+  },
+  computed: {
+    numberOfQuestions() {
+      return this.fetchedWords.length;
+    },
+    isLastQuestion() {
+      return this.clickCount === this.numberOfQuestions - 1;
+    },
   },
   methods: {
     startTest() {
-      if (this.numberOfQuestions < 1) {
-        alert('Number of questions must be at least 1.');
-        return;
-      }
       if (!this.selectedFile) {
         alert('Please select a JSON file.');
         return;
@@ -124,52 +129,53 @@ export default {
       this.fetchData();
     },
     fetchData() {
-      fetch(`http://127.0.0.1:5000/test?file=${this.selectedFile}`)
+      this.myheaders.append('Content-Type','text/plain; charset=UTF-8')
+      fetch(`http://127.0.0.1:5000/test?file=${this.selectedFile}`, this.myheaders)
         .then((response) => response.json())
         .then((data) => {
           this.fetchedWords = data;
-          this.maxQuestions = data.length;
-          this.numberOfQuestions = Math.min(this.numberOfQuestions, this.maxQuestions);
           this.nextWord();
+          console.log(data);
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
         });
     },
     checkAnswer() {
-      if (this.userInput.trim() === this.currentWord.german) {
-        this.resultMessage = 'Correct!!!';
-        this.resultColor = 'green';
-      } else {
-        this.resultMessage = 'Wrong!!!';
-        this.resultColor = 'red';
-        this.wrongAnswers.push({
-          question: this.currentWord.english,
-          yourAnswer: this.userInput,
-          correctAnswer: this.currentWord.german,
-        });
-      }
-      this.submitDisabled = true;
-      this.clickCount++;
+    if (this.userInput.trim() === this.currentWord.german) {
+      this.resultMessage = 'Correct!!!';
+      this.resultColor = 'green';
+    } else {
+      this.resultMessage = 'Wrong!!!';
+      this.resultColor = 'red';
+      this.wrongAnswers.push({
+        question: this.currentWord.english,
+        yourAnswer: this.userInput,
+        correctAnswer: this.currentWord.german,
+      });
+    }
+    this.submitDisabled = true;
+    this.clickCount++;
 
-      if (this.clickCount === this.numberOfQuestions || this.fetchedWords.length === 0) {
-        this.testCompleted = true;
-      }
-    },
+    if (this.clickCount >= this.numberOfQuestions) {
+      this.testCompleted = true;
+    } else {
+      this.nextWord();
+    }
+  },
     nextWord() {
-      if (this.fetchedWords.length > 0) {
-        this.currentWord = this.fetchedWords.shift(); // Pop the first element from the array
-        this.userInput = '';
-        this.resultMessage = '';
-        this.resultColor = '';
-        this.submitDisabled = false;
-      } else {
-        this.testCompleted = true;
-      }
-    },
+    if (this.clickCount < this.numberOfQuestions) {
+      this.currentWord = this.fetchedWords[this.clickCount]; 
+      this.userInput = '';
+      this.resultMessage = '';
+      this.resultColor = '';
+      this.submitDisabled = false;
+    } else {
+      this.testCompleted = true;
+    }
+  },
     resetTest() {
       this.started = false;
-      this.numberOfQuestions = 5;
       this.selectedFile = '';
       this.currentWord = { english: '', german: '' };
       this.userInput = '';
@@ -185,7 +191,6 @@ export default {
       html2canvas(document.querySelector('#app')).then(canvas => {
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
-
         link.download = `test-results-${Date.now()}.png`;
         link.click();
       });
@@ -313,12 +318,15 @@ p {
   align-items: center;
 }
 
-.input-container .label {
-  margin-bottom: 10px;
-}
-
-.input-container .text-box {
-  margin-top: 5px;
+.dropdown-box {
+  margin-top: 10px;
+  padding: 8px;
+  font-size: 1.25rem;
+  border-radius: 8px;
+  border: 1px solid #A02334;
+  background-color: white;
+  color: black;
+  width: 200px;
 }
 
 .no-wrong-answers-message {
@@ -330,36 +338,14 @@ p {
 .go-home-button {
   font-size: 1.5rem;
   padding: 10px 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   cursor: pointer;
-  background-color: #A02334;
-  color: white;
-  border: none;
-  border-radius: 8px;
 }
 
-button:disabled {
-  background-color: grey;
-  cursor: not-allowed;
-}
-
-.screenshot-button {
-  font-size: 1.5rem;
-  padding: 10px 20px;
-  margin-top: 20px;
-  cursor: pointer;
-  background-color: #A02334;
-  color: white;
-  border: none;
-  border-radius: 8px;
-}
-
-.dropdown-box {
-  background-color: white;
-  border-radius: 8px;
-  color: black;
+.question-counter {
   font-size: 1.25rem;
-  padding: 10px;
-  width: 200px;
+  margin-bottom: 10px;
+  color: #A02334;
 }
+
 </style>
