@@ -91,6 +91,134 @@
         {
             "german": "wohnen",
             "english": "to live(live at a place)"
+        },
+        {
+            "german": "begrüßen",
+            "english": "to greet"
+        },
+        {
+            "german": "bestellen",
+            "english": "to order"
+        },
+        {
+            "german": "besuchen",
+            "english": "to visit or to attend"
+        },
+        {
+            "german": "buchstabieren",
+            "english": "to spell"
+        },
+        {
+            "german": "essen",
+            "english": "to eat"
+        },
+        {
+            "german": "fehlen",
+            "english": "to be missing"
+        },
+        {
+            "german": "gibt (geben)",
+            "english": "to give"
+        },
+        {
+            "german": "geboren sein",
+            "english": "to be born"
+        },
+        {
+            "german": "gehen",
+            "english": "to walk"
+        },
+        {
+            "german": "glauben",
+            "english": "to believe"
+        },
+        {
+            "german": "haben",
+            "english": "to have"
+        },
+        {
+            "german": "hilft (helfen)",
+            "english": "to help"
+        },
+        {
+            "german": "klingeln",
+            "english": "to ring"
+        },
+        {
+            "german": "lädt ein (einladen)",
+            "english": "to invite"
+        },
+        {
+            "german": "nehmen",
+            "english": "to take"
+        },
+        {
+            "german": "öffnen",
+            "english": "to open"
+        },
+        {
+            "german": "stehen",
+            "english": "to stand"
+        },
+        {
+            "german": "trinken",
+            "english": "to drink"
+        },
+        {
+            "german": "weiß (wissen)",
+            "english": "to know"
+        },
+        {
+            "german": "wiederholen",
+            "english": "to repeat"
+        },
+        {
+            "german": "ausgeben",
+            "english": "to spend"
+        },
+        {
+            "german": "bekommen",
+            "english": "to receive"
+        },
+        {
+            "german": "brauchen",
+            "english": "to need"
+        },
+        {
+            "german": "finden",
+            "english": "to find"
+        },
+        {
+            "german": "funktionieren",
+            "english": "to function/to work"
+        },
+        {
+            "german": "kaufen",
+            "english": "to buy"
+        },
+        {
+            "german": "kosten",
+            "english": "to cost"
+        },
+        {
+            "german": "sammeln",
+            "english": "to collect"
+        },
+        {
+            "german": "schauen",
+            "english": "to look"
+        },
+        {
+            "german": "stimmen",
+            "english": "to correct/to vote"
+        },
+        {
+            "german": "verkaufen",
+            "english": "to sell"
+        },
+        {
+            "german": "wechseln",
+            "english": "to exchange/to change"
         }
     ]
 }

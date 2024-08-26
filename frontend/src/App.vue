@@ -2,9 +2,15 @@
   <div id="app">
     <!-- Start Page -->
     <div v-if="!started">
+      <div class="stats-container">
+        <p class="stats-text">No. of words known: {{ homeData[0] }}</p>
+        <p class="stats-text">Rate of learning: {{ (homeData[0] / homeData[1]).toFixed(2) }} / day</p>
+      </div>
+
       <button @click="startTest" class="start-button">
         Start Test
       </button>
+
       <div class="input-container">
         <label for="jsonFile" class="label">Select JSON File:</label>
         <select
@@ -90,7 +96,8 @@ export default {
     return {
       started: false,
       selectedFile: '',
-      jsonFiles: ['A1 Nouns', 'A1 Verbs'], // Add your JSON file names here
+      jsonFiles: ['A1 Nouns', 'A1 Verbs', 'A1 Adjectives', 'A1 Others'],
+      homeData: [0, 1], // default values for words learned and delta days
       currentWord: {
         english: '',
         german: '',
@@ -103,7 +110,7 @@ export default {
       fetchedWords: [],
       testCompleted: false,
       submitDisabled: false,
-      myheaders: new Headers()
+      myheaders: new Headers(),
     };
   },
   computed: {
@@ -113,6 +120,9 @@ export default {
     isLastQuestion() {
       return this.clickCount === this.numberOfQuestions - 1;
     },
+  },
+  mounted() {
+    this.fetchHome();
   },
   methods: {
     startTest() {
@@ -128,8 +138,15 @@ export default {
       this.submitDisabled = false;
       this.fetchData();
     },
+    fetchHome() {
+      fetch('http://127.0.0.1:5000')
+        .then((response) => response.json())
+        .then((data) => {
+          this.homeData = data.home_data;
+        });
+    },
     fetchData() {
-      this.myheaders.append('Content-Type','text/plain; charset=UTF-8')
+      this.myheaders.append('Content-Type', 'text/plain; charset=UTF-8');
       fetch(`http://127.0.0.1:5000/test?file=${this.selectedFile}`, this.myheaders)
         .then((response) => response.json())
         .then((data) => {
@@ -142,38 +159,38 @@ export default {
         });
     },
     checkAnswer() {
-    if (this.userInput.trim() === this.currentWord.german) {
-      this.resultMessage = 'Correct!!!';
-      this.resultColor = 'green';
-    } else {
-      this.resultMessage = 'Wrong!!!';
-      this.resultColor = 'red';
-      this.wrongAnswers.push({
-        question: this.currentWord.english,
-        yourAnswer: this.userInput,
-        correctAnswer: this.currentWord.german,
-      });
-    }
-    this.submitDisabled = true;
-    this.clickCount++;
+      if (this.userInput.trim() === this.currentWord.german) {
+        this.resultMessage = 'Correct!!!';
+        this.resultColor = 'green';
+      } else {
+        this.resultMessage = 'Wrong!!!';
+        this.resultColor = 'red';
+        this.wrongAnswers.push({
+          question: this.currentWord.english,
+          yourAnswer: this.userInput,
+          correctAnswer: this.currentWord.german,
+        });
+      }
+      this.submitDisabled = true;
+      this.clickCount++;
 
-    if (this.clickCount >= this.numberOfQuestions) {
-      this.testCompleted = true;
-    } else {
-      this.nextWord();
-    }
-  },
+      if (this.clickCount >= this.numberOfQuestions) {
+        this.testCompleted = true;
+      } else {
+        this.nextWord();
+      }
+    },
     nextWord() {
-    if (this.clickCount < this.numberOfQuestions) {
-      this.currentWord = this.fetchedWords[this.clickCount]; 
-      this.userInput = '';
-      this.resultMessage = '';
-      this.resultColor = '';
-      this.submitDisabled = false;
-    } else {
-      this.testCompleted = true;
-    }
-  },
+      if (this.clickCount < this.numberOfQuestions) {
+        this.currentWord = this.fetchedWords[this.clickCount];
+        this.userInput = '';
+        this.resultMessage = '';
+        this.resultColor = '';
+        this.submitDisabled = false;
+      } else {
+        this.testCompleted = true;
+      }
+    },
     resetTest() {
       this.started = false;
       this.selectedFile = '';
@@ -188,7 +205,7 @@ export default {
       this.submitDisabled = false;
     },
     takeScreenshot() {
-      html2canvas(document.querySelector('#app')).then(canvas => {
+      html2canvas(document.querySelector('#app')).then((canvas) => {
         const link = document.createElement('a');
         link.href = canvas.toDataURL('image/png');
         link.download = `test-results-${Date.now()}.png`;
@@ -198,6 +215,7 @@ export default {
   },
 };
 </script>
+
 
 <style>
 .text-box {
@@ -346,6 +364,17 @@ p {
   font-size: 1.25rem;
   margin-bottom: 10px;
   color: #A02334;
+}
+
+.stats-container {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.stats-text {
+  font-size: 1.5rem;
+  color: #4a5568; /* Gray color */
+  margin: 5px 0;
 }
 
 </style>

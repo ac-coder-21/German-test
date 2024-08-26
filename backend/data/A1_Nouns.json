@@ -21,11 +21,11 @@
             "english": "Answer"
         },
         {
-            "german": "der Artz",
+            "german": "der Arzt",
             "english": "Doctor"
         },
         {
-            "german": "die Artzin",
+            "german": "die Ärztin",
             "english": "Female Doctor"
         },
         {
@@ -85,7 +85,7 @@
             "english": "photo"
         },
         {
-            "german": "dir Frage",
+            "german": "die Frage",
             "english": "Question"
         },
         {
@@ -145,7 +145,7 @@
             "english": "Female Teacher"
         },
         {
-            "german": "das Lehrer",
+            "german": "der Lehrer",
             "english": "Male Teacher"
         },
         {
@@ -245,7 +245,7 @@
             "english": "Telephone"
         },
         {
-            "german": "die Telephonnummer",
+            "german": "die Telefonnummer",
             "english": "Telephone number"
         },
         {
